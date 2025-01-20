@@ -12,7 +12,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Gera valores para os IDs
     private Long id;
 
-    private String tilte;
+    private String title;
 
     @Column(name = "game_year") // year é uma palavra reservada do SQL, então esse comando muda o nome da coluna
     private Integer year;
@@ -21,7 +21,12 @@ public class Game {
     private String platforms;
     private Double score;
     private String imgUrl;
+
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+
+    // Padrão do SQL colocar o tamanho para VARCHAR(255) o que é muito pequeno para essa descrição
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
     // Construtors
@@ -31,7 +36,7 @@ public class Game {
     public Game(Long id, String tilte, Integer year, String genre, String platforms, Double score, String imgUrl,
                 String shortDescription, String longDescription) {
         this.id = id;
-        this.tilte = tilte;
+        this.title = tilte;
         this.year = year;
         this.genre = genre;
         this.platforms = platforms;
@@ -52,11 +57,11 @@ public class Game {
     }
 
     public String getTilte() {
-        return tilte;
+        return title;
     }
 
     public void setTilte(String tilte) {
-        this.tilte = tilte;
+        this.title = tilte;
     }
 
     public Integer getYear() {
