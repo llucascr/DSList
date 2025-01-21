@@ -17,7 +17,7 @@ public class GameMinDTO {
 
     public GameMinDTO(Game entity) {
         id = entity.getId();
-        title = entity.getTilte();
+        title = entity.getTitle();
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         shortDescription = entity.getShortDescription();

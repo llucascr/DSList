@@ -1,11 +1,11 @@
 package com.llucascr.dslist.controllers;
 
+import com.llucascr.dslist.dto.GameDTO;
 import com.llucascr.dslist.dto.GameMinDTO;
-import com.llucascr.dslist.entities.Game;
 import com.llucascr.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +24,9 @@ public class GameController {
         return result;
     }
 
-//    @GetMapping("/allgames")
-//    public List<Game> findAllGames() {
-//        return gameService.findAllGames();
-//    }
+    @GetMapping(value = "/{id}")
+    public GameDTO findById(@PathVariable Long id) {
+        return gameService.findById(id);
+    }
+
 }

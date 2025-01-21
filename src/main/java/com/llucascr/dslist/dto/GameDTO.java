@@ -1,51 +1,27 @@
-package com.llucascr.dslist.entities;
+package com.llucascr.dslist.dto;
 
-import jakarta.persistence.*;
+import com.llucascr.dslist.entities.Game;
+import org.springframework.beans.BeanUtils;
 
-import java.util.Objects;
+public class GameDTO {
 
-@Entity
-@Table(name = "tb_game")
-public class Game {
-
-    @Id // Indentifica que o campo é uma PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Gera valores para os IDs
     private Long id;
-
     private String title;
-
-    @Column(name = "game_year") // year é uma palavra reservada do SQL, então esse comando muda o nome da coluna
     private Integer year;
-
     private String genre;
     private String platforms;
     private Double score;
     private String imgUrl;
-
-    @Column(columnDefinition = "TEXT")
     private String shortDescription;
-
-    // Padrão do SQL colocar o tamanho para VARCHAR(255) o que é muito pequeno para essa descrição
-    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
     // Constructors
-    public Game() {
+    public GameDTO() {
     }
 
-    public Game(Long id, String tilte, Integer year, String genre, String platforms, Double score, String imgUrl,
-                String shortDescription, String longDescription) {
-        this.id = id;
-        this.title = tilte;
-        this.year = year;
-        this.genre = genre;
-        this.platforms = platforms;
-        this.score = score;
-        this.imgUrl = imgUrl;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
+    public GameDTO(Game entity) {
+        BeanUtils.copyProperties(entity, this); // Copia todos os atributos com mesmo nome
     }
-
 
     // Getters / Setters
     public Long getId() {
@@ -60,8 +36,8 @@ public class Game {
         return title;
     }
 
-    public void setTitle(String tilte) {
-        this.title = tilte;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getYear() {
@@ -120,16 +96,4 @@ public class Game {
         this.longDescription = longDescription;
     }
 
-    // Equals / HashCode
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return Objects.equals(id, game.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }
